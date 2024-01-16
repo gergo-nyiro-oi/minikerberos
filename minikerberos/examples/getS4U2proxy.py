@@ -13,7 +13,7 @@ async def getS4U2proxy(kerberos_url, spn, targetuser, kirbifile = None, ccachefi
 	cu = KerberosClientFactory.from_url(kerberos_url)
 	client = cu.get_client()
 	service_spn = KerberosSPN.from_spn(spn)
-	target_user = KerberosSPN.from_upn(targetuser)
+	target_user = KerberosSPN.from_spn(targetuser)
 	
 	if cu.secret_type != KerberosSecretType.CCACHE:
 		logger.debug('Getting TGT')

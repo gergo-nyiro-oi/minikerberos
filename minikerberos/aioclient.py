@@ -723,8 +723,10 @@ class AIOKerberosClient:
 		)
 		
 	async def getST(self, target_user, service_spn):
-		tgs, encTGSRepPart, key  = await self.S4U2self(target_user)
-		return await self.S4U2proxy(tgs['ticket'], service_spn)
+# 		tgs, encTGSRepPart, key  = await self.S4U2self(target_user) 
+		#tgs, encpart, key = await self.get_TGS(service_spn, flags=['forwardable','renewable','renewable_ok', 'canonicalize', 'constrained-delegation'])
+		tgs, encpart, key = await self.get_TGS(service_spn)
+		return await self.S4U2proxy(tgs['ticket'], target_user)
 
 
 	def decrypt_asrep_cert(self, as_rep):
